@@ -18,20 +18,32 @@ angular
     'ngTouch',
     'satellizer',
     'authService',
-    'toastr'
+    'toastr',
+    'restangular'
   ])
-  .config(function ($routeProvider, $authProvider) {
+  .config(function ($routeProvider, $authProvider, RestangularProvider) {
     $authProvider.loginUrl ='http://localhost:8000/authlogin';
+    RestangularProvider.setBaseUrl('http://localhost:8000');
     $routeProvider
       .when('/dashboard', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+        controllerAs: 'main',
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/usuarios',{
+        templateUrl:'views/usuarios/index.html',
+        controller:'UserCtrl',
+        controllerAs:'enc'
+      })
+      .when('/company',{
+        templateUrl:'views/company/index.html',
+        controller:'CompanyCtrl',
+        controllerAs:'comp'
+      })
+      .when('/encuestas', {
+        templateUrl: 'views/encuestas/index.html',
+        controller: 'EncuestasCtrl',
+        controllerAs: 'enc'
       })
       .when('/',{
         templateUrl:'views/login.html',

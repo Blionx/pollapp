@@ -8,9 +8,10 @@
  * Controller of the apiFrontApp
  */
 angular.module('apiFrontApp')
-  .controller('MainCtrl', function () {
+  .controller('MainCtrl', function (Restangular) {
     var ctrl = this;
     ctrl.menuTemplate = {
     	url: 'views/menu.html'
-    }
+    };
+
   });

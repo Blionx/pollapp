@@ -1,0 +1,103 @@
+<div ng-include="enc.menuTemplate.url"></div>
+<div class="container">
+	<div class="col-md-12" ng-if="enc.edit==false && enc.new == false">
+		<div class="col-md-12"><a class="col-md-4 pull-right btn btn-success" ng-click="enc.new= true;"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo Usuario</a></div>
+		<table class="table table-striped table-hover">
+			<thead>
+				<th>Nombre</th>
+				<th>Correo</th>
+				<th>Tipo</th>
+				<th>Acciones</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="e in enc.encuestas ">
+					<td>{{e.name}}</td>
+					<td>{{e.email}}</td>
+					<td ng-if="e.type==0">Super Admin</td>
+					<td ng-if="e.type==1">Admin</td>
+					<td ng-if="e.type==2">usuario</td>
+					<td class="col-md-6 ">
+						<a class="btn btn-info col-md-3" ng-click="enc.showedit(e.id);"><i class="glyphicon glyphicon-edit"> </i></a>
+						<a class="col-md-3 col-md-offset-1 btn btn-primary"><i class="glyphicon glyphicon-export"></i></a>
+						<a class="col-md-3 col-md-offset-1 btn btn-danger" ng-click="enc.eliminar(e.id);"><i class="glyphicon glyphicon-remove-circle"></i></a>
+					</td>
+				</tr>
+				<tr ng-if="enc.encuestas.length<=0" class="text-center"><td colspan="3">No Existen Usuarios Actualmente</td></tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-md-12" ng-if="enc.edit==true">
+		<div class="col-md-12"><h1>Editar Usuario: {{enc.single.name}}</h1></div>
+		<div class="col-md-12 well">
+			<div class="col-md-6">
+				<div class="form-group">
+					<span>Nombre del Usuario</span>
+					<input type="text" ng-model="enc.single.name" class="form-control">
+				</div>
+				<div class="form-group">
+					<span>Tipo de Usuario</span>
+					<select ng-options="option.name for option in enc.options track by option.id"  ng-model="enc.single.type" class="form-control" >
+					</select>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<span>E-mail</span>
+					<input type="email" ng-model="enc.single.email" class="form-control">
+				</div>
+				<div class="form-group">
+					<span>Contraseña</span>
+					<input type="password" ng-model="enc.single.password" class="form-control" ng-class="{disabled : menu.isActive('/usuarios')}">
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<span>Empresa a la que pertenece:</span>
+					<select>
+						<option ng-repeat(comp in enc.comp) value="{{comp.id}}">{{comp.name}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-12"><a class="pull-right btn btn-info" ng-click="enc.put();"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a></div>
+		</div>
+	</div>
+	<div class="col-md-12" ng-if="enc.new==true">
+		<div class="col-md-12"><h1>Nuevo Usuario</h1></div>
+		<div class="col-md-12 well">
+			<div class="col-md-6">
+				<div class="form-group">
+					<span>Nombre del Usuario</span>
+					<input type="text" ng-model="enc.newsingle.name" class="form-control">
+				</div>
+				<div class="form-group">
+					<span>Tipo de Usuario</span>
+					<select  ng-model="enc.newsingle.type" class="form-control">
+						<option>seleccione</option>
+						<option value="1" >Administrador</option>
+						<option value="2" >Usuario</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<span>E-mail</span>
+					<input type="email" ng-model="enc.newsingle.email" class="form-control">
+				</div>
+				<div class="form-group">
+					<span>Contraseña</span>
+					<input type="password" ng-model="enc.newsingle.password" class="form-control">
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<span>Empresa a la que pertenece:</span>
+					<select class="form-control" ng-model="enc.newsingle.company_id">
+						<option ng-repeat="comp in enc.company" value="{{comp.id}}">{{comp.name}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-12"><a class="pull-right btn btn-info" ng-click="enc.guardar();"><i class="glyphicon glyphicon-ok"></i> Guardar</a><a class="pull-right btn btn-danger" ng-click="enc.new=false"><i class="glyphicon glyphicon-remove"></i> Cancelar</a></div>
+		</div>
+
+	</div>
+</div>

@@ -32,6 +32,8 @@ module.exports = function(config) {
       'bower_components/satellizer/dist/satellizer.js',
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/lodash/lodash.js',
+      'bower_components/restangular/dist/restangular.js',
       // endbower
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
